@@ -54,11 +54,11 @@ const Home = () => {
   };
 
   const handleMyAgents = () => {
-    console.log("My Agents clicked");
+    navigate("/agents");
   };
 
   const handleCreateAgent = () => {
-    console.log("Create New Agent clicked");
+    navigate("/agents/new");
   };
 
   const handleIntegrations = () => {

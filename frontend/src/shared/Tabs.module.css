@@ -1,0 +1,139 @@
+.tabs {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+
+.list {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.list::-webkit-scrollbar {
+  display: none;
+}
+
+.sizeSm .tab {
+  padding: 0.375rem 0.625rem;
+  font-size: 0.8125rem;
+}
+
+.sizeMd .tab {
+  padding: 0.5rem 0.875rem;
+  font-size: 0.875rem;
+}
+
+.sizeLg .tab {
+  padding: 0.625rem 1.125rem;
+  font-size: 0.9375rem;
+}
+
+.tab {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--muted-foreground);
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 1.25;
+  white-space: nowrap;
+  cursor: pointer;
+  border-radius: calc(var(--radius) * 0.8);
+  transition:
+    color 150ms ease,
+    background-color 150ms ease,
+    border-color 150ms ease;
+}
+
+.tab:hover:not(:disabled) {
+  color: var(--foreground);
+}
+
+.tab:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.tab:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.tabIcon {
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+/* line variant */
+.variantLine {
+  gap: 0;
+}
+
+.variantLine .tab {
+  border-radius: 0;
+  padding-inline: 0.875rem;
+}
+
+.variantLine .tab::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background-color: transparent;
+  border-radius: 2px 2px 0 0;
+  transition: background-color 150ms ease;
+}
+
+.variantLine .tabSelected {
+  color: var(--foreground);
+}
+
+.variantLine .tabSelected::after {
+  background-color: var(--primary);
+}
+
+/* pill variant */
+.variantPill .tab {
+  border-radius: 999px;
+}
+
+.variantPill .tabSelected {
+  background-color: var(--secondary);
+  color: var(--secondary-foreground);
+}
+
+/* enclosed variant */
+.variantEnclosed {
+  gap: 0;
+}
+
+.variantEnclosed .tab {
+  border-color: transparent;
+  border-radius: calc(var(--radius) * 0.8) calc(var(--radius) * 0.8) 0 0;
+}
+
+.variantEnclosed .tabSelected {
+  border-color: color-mix(in srgb, var(--foreground) 12%, transparent);
+  background-color: var(--card);
+  color: var(--foreground);
+}
+
+.panel {
+  outline: none;
+}
+
+.panel:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 4px;
+}

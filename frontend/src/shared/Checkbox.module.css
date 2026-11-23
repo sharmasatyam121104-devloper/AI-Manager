@@ -1,0 +1,109 @@
+.root {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 0.625rem;
+  font-size: 0.875rem;
+  color: var(--foreground);
+  cursor: pointer;
+  user-select: none;
+}
+
+.control {
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+  width: 1.125rem;
+  height: 1.125rem;
+  margin-top: 0.125rem;
+}
+
+.input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: inherit;
+}
+
+.box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border: 1px solid var(--input);
+  border-radius: 0.25rem;
+  background-color: color-mix(in srgb, var(--background) 60%, transparent);
+  color: var(--primary-foreground);
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    box-shadow 150ms ease;
+}
+
+.root:hover .box {
+  border-color: var(--ring);
+}
+
+.input:focus-visible + .box {
+  border-color: var(--ring);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ring) 35%, transparent);
+}
+
+.input:checked + .box,
+.input:indeterminate + .box {
+  border-color: var(--primary);
+  background-color: var(--primary);
+}
+
+.input:disabled + .box {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.checkIcon,
+.minusIcon {
+  opacity: 0;
+  transform: scale(0.5);
+  transition:
+    opacity 120ms ease,
+    transform 150ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.input:checked + .box .checkIcon {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.input:indeterminate + .box .checkIcon {
+  opacity: 0;
+}
+
+.input:indeterminate + .box .minusIcon {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  min-width: 0;
+}
+
+.labelText {
+  font-weight: 500;
+}
+
+.description {
+  font-size: 0.75rem;
+  line-height: 1.45;
+  color: var(--muted-foreground);
+}
+
+.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

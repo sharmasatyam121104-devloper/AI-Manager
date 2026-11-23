@@ -9,6 +9,7 @@ import cookieParser from "cookie-parser";
 
 import DBConnect from "./config/db.config";
 import AuthRouter from "./routes/auth.route";
+import AgentRouter from "./routes/agent.route";
 
 const app = express();
 
@@ -37,6 +38,7 @@ app.get("/", (_req, res) => {
 });
 
 app.use("/auth", AuthRouter);
+app.use("/agent", AgentRouter);
 
 const PORT = process.env.PORT || 8080;
 

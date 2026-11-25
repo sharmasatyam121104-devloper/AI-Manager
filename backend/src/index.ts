@@ -10,6 +10,7 @@ import cookieParser from "cookie-parser";
 import DBConnect from "./config/db.config";
 import AuthRouter from "./routes/auth.route";
 import AgentRouter from "./routes/agent.route";
+import ChatRouter from "./routes/chat.route";
 
 const app = express();
 
@@ -39,6 +40,14 @@ app.get("/", (_req, res) => {
 
 app.use("/auth", AuthRouter);
 app.use("/agent", AgentRouter);
+app.use("/chat", ChatRouter);
+
+app.use( (_req, res) => {
+    res.status(404).json({
+        success: false,
+        message: "This Route not found",
+    });
+});
 
 const PORT = process.env.PORT || 8080;
 

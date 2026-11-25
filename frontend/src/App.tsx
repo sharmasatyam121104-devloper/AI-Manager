@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import CreateAgent from "./pages/CreateAgent";
 import NotFound from "./pages/NotFound";
 import Agents from "./pages/Agents";
+import Chat from "./pages/Chat";
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/agents" element={<Agents />} />
           <Route path="/agents/new" element={<CreateAgent />} />
+          <Route path="/chat" element={<Chat />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

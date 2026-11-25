@@ -5,6 +5,7 @@ import {
   Plug,
   LogOut,
   Sparkles,
+  ArrowUp,
 } from "lucide-react";
 import {
   Avatar,
@@ -15,7 +16,7 @@ import {
   DropdownSeparator,
   toast,
 } from "../shared";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import api from "../lib/api";
 import { useNavigate } from "react-router";
 import type { UserInterface } from "../interfaces/user.interface";
@@ -25,6 +26,14 @@ const Home = () => {
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const [me, setMe] = useState<UserInterface | null>(null);
+    const [prompt, setPrompt] = useState("");
+
+  const handleSend = (e: FormEvent) => {
+    e.preventDefault();
+    const trimmed = prompt.trim();
+    if (!trimmed) return;
+    navigate(`/chat?message=${encodeURIComponent(trimmed)}`);
+  };
 
   const handleLogout = async () => {
     try {
@@ -190,8 +199,46 @@ const Home = () => {
       </header>
 
       {/* Main Content */}
-      <main className="mx-auto max-w-7xl px-5 py-10 sm:px-8">
-        {/* Your homepage content goes here */}
+      <main className="mx-auto flex min-h-[calc(100vh-4rem)] max-w-3xl flex-col items-center justify-center px-5 py-12 sm:px-8">
+        <div className="w-full text-center">
+          <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-white text-black">
+            <Sparkles size={26} strokeWidth={2.2} />
+          </div>
+
+          <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
+            Welcome, {me?.fullname?.split(" ")[0] || "there"}
+          </h1>
+
+          <p className="mx-auto mt-4 max-w-xl text-sm leading-6 text-zinc-400 sm:text-base">
+            This is <span className="text-zinc-200">Automata AI</span> — your
+            workspace to create custom AI agents, connect your tools, and chat
+            with AI to automate your tasks. Type a message below to start a
+            conversation.
+          </p>
+
+          <form onSubmit={handleSend} className="mx-auto mt-10 w-full max-w-xl">
+            <div className="flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 p-2 pl-5 transition focus-within:border-white/25">
+              <input
+                value={prompt}
+                onChange={(e) => setPrompt(e.target.value)}
+                placeholder="Ask anything..."
+                aria-label="Message"
+                className="h-11 w-full min-w-0 bg-transparent text-sm text-white outline-none placeholder:text-zinc-500"
+              />
+              <Button
+                type="submit"
+                size="icon"
+                disabled={!prompt.trim()}
+                aria-label="Send message"
+              >
+                <ArrowUp size={17} />
+              </Button>
+            </div>
+            <p className="mt-3 text-xs text-zinc-600">
+              Chats are temporary — they clear when you refresh.
+            </p>
+          </form>
+        </div>
       </main>
     </div>
   );
